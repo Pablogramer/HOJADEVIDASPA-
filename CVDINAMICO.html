@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pablo Robles Duarte | Ingeniero Industrial & Líder STEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255,255,255,0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .section-header h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-header i {
+            transition: transform 0.3s;
+        }
+        
+        .section-content {
+            display: block;
+        }
+        
+        .collapsed .section-content {
+            display: none;
+        }
+        
+        .collapsed .section-header i {
+            transform: rotate(-90deg);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--secondary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--secondary);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .timeline-subtitle {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 4px;
+        }
+        
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .language-name {
+            font-weight: bold;
+        }
+        
+        .language-level {
+            color: var(--secondary);
+            font-style: italic;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+            background: white;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-container {
+                flex-direction: column;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Toggle dark mode */
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        
+        .dark-mode .section {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+        }
+        
+        .dark-mode .timeline-title,
+        .dark-mode .skill-category h3,
+        .dark-mode h2 {
+            color: #f0f0f0;
+        }
+        
+        .dark-mode .timeline-subtitle {
+            color: #aaa;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            border: none;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <!-- Reemplaza con tu foto real -->
+            <img src="C:\ESCRITORIO\PRACTICAS\PAGINA WEB CV\RESOURCES\images\CV PHOTO.png" alt="Pablo Robles Duarte" class="profile-pic">
+            <h1>Pablo Robles Duarte</h1>
+            <p class="tagline">Estudiante de Ingeniería Industrial | Líder STEM | Políglota</p>
+            <div class="social-links">
+
+                <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+            </a>
+
+            <!-- Indeed -->
+            <a href="https://profile.indeed.com/resume#" target="_blank">
+            <i class="fas fa-briefcase"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/pablo.roblesduarte/" target="_blank">
+            <i class="fab fa-instagram"></i>
+            </a>
+
+            <!-- Correo -->
+            <a href="mailto:pablo.robles@utp.edu.co">
+            <i class="fas fa-envelope"></i>
+            </a>
+
+            <!-- PDF (opcional) -->
+            <a href="docs/CV_Pablo_Robles.pdf" download>
+            <i class="fas fa-file-pdf"></i>
+            </a>
+
+                <a href="https://github.com/Pablogramer">
+                    <i class="fab fa-github"></i>
+                </a>
+                
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section animate" id="about-section">
+            <div class="section-header" onclick="toggleSection('about-section')">
+                <h2><i class="fas fa-user"></i> Perfil Profesional</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="section-content">
+                <p>Estudiante de Ingeniería Industrial en la Universidad Tecnológica de Pereira con experiencia internacional en servicio al cliente y ventas bilingües. Líder del equipo STEM en la competencia NASA HERC (Alabama, USA) y miembro de semilleros de robótica/aeronáutica.</p>
+                <p>Competente en análisis financiero (NYIF), programación (Harvard CS50) y creación de negocios (UBC). Dominio de inglés (C1), francés (B1), y japonés (A2).</p>
+                <div class="contact-info" style="margin-top: 1.5rem;">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <div>
+                            <h3>Fecha de Nacimiento</h3>
+                            <p>23 de Mayo de 2001 (23 años)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Ubicación</h3>
+                            <p>Pereira, Colombia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div>
+                            <h3>Documento</h3>
+                            <p>C.C. 1004702402</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section animate delay-1" id="education-section">
+            <div class="section-header" onclick="toggleSection('education-section')">
+                <h2><i class="fas fa-graduation-cap"></i> Educación</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="section-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - Presente</div>
+                        <h3 class="timeline-title">Ingeniería Industrial</h3>
+                        <p class="timeline-subtitle">Universidad Tecnológica de Pereira</p>
+                        <ul>
+                            <li>Miembro del semillero de robótica y aeronáutica</li>
+                            <li>Diplomado en Innovación y Emprendimiento</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2019</div>
+                        <h3 class="timeline-title">Bachiller Académico</h3>
+                        <p class="timeline-subtitle">Colegio La Salle Pereira</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 2rem; color: var(--primary);">Certificaciones Destacadas</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024</div>
+                        <h3 class="timeline-title">Programación HTML, CSS & JavaScript</h3>
+                        <p class="timeline-subtitle">Harvard CSSOX (Cursando)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023</div>
+                        <h3 class="timeline-title">Análisis del Mercado y Bolsa de Valores</h3>
+                        <p class="timeline-subtitle">New York Institute of Finance</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023</div>
+                        <h3 class="timeline-title">NASA HERC - Líder STEM</h3>
+                        <p class="timeline-subtitle">Human Exploration Rover Challenge</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025</div>
+                        <h3 class="timeline-title">Six Sigma Green Belt</h3>
+                        <p class="timeline-subtitle">Sys</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024</div>
+                        <h3 class="timeline-title">Laboratorio del cambio</h3>
+                        <p class="timeline-subtitle">Centro de liderazgo Regional UTP</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section animate delay-2" id="experience-section">
+            <div class="section-header" onclick="toggleSection('experience-section')">
+                <h2><i class="fas fa-briefcase"></i> Experiencia Laboral</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="section-content">
+                <div class="timeline">
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Nov 2023 - May 2024</div>
+                        <h3 class="timeline-title">Agente Bilingüe de Servicio al Cliente</h3>
+                        <p class="timeline-subtitle">24/7 (AT&T), Remoto</p>
+                        <ul>
+                            <li>Atención al cliente en inglés (C1) con multitasking</li>
+                            <li>Resolución de problemas técnicos y de facturación</li>
+                            <li>Manejo de empatía con clientes en situaciones complejas</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Dic 2021 - Mar 2022</div>
+                        <h3 class="timeline-title">Agente Bilingüe de Ventas</h3>
+                        <p class="timeline-subtitle">Accedo (AT&T), Remoto</p>
+                        <ul>
+                            <li>Venta de planes y dispositivos móviles (inglés B2+)</li>
+                            <li>Puente entre departamentos técnicos y clientes</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="section animate delay-3" id="skills-section">
+            <div class="section-header" onclick="toggleSection('skills-section')">
+                <h2><i class="fas fa-code"></i> Habilidades</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="section-content">
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-language"></i> Idiomas</h3>
+                        <div class="language-item">
+                            <span class="language-name">Español</span>
+                            <span class="language-level">Nativo</span>
+                        </div>
+                        <div class="language-item">
+                            <span class="language-name">Inglés</span>
+                            <span class="language-level">C1 Avanzado</span>
+                        </div>
+                        <div class="language-item">
+                            <span class="language-name">Francés</span>
+                            <span class="language-level">B1 Intermedio</span>
+                        </div>
+                        <div class="language-item">
+                            <span class="language-name">Japonés</span>
+                            <span class="language-level">A2 Básico</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-laptop-code"></i> Tecnologías</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Python</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>C++</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>HTML/CSS/JavaScript</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>VBA/Excel</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-cogs"></i> Otras Competencias</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Análisis Financiero</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Liderazgo</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Six sigma & Lean Manufacturing</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Comunicación Intercultural</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Pablo Robles Duarte. Todos los derechos reservados.</p>
+        <p style="margin-top: 0.5rem;">Última actualización: Junio 2024</p>
+    </footer>
+
+    <button class="theme-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Función para alternar secciones plegables
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('collapsed');
+        }
+        
+        // Función para modo oscuro
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.theme-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+        
+        // Inicializar algunas secciones plegadas
+        window.onload = function() {
+            // Plegar todas las secciones excepto el perfil
+            document.getElementById('education-section').classList.add('collapsed');
+            document.getElementById('experience-section').classList.add('collapsed');
+            document.getElementById('skills-section').classList.add('collapsed');
+            
+            // Animación de habilidades al hacer scroll
+            const skillBars = document.querySelectorAll('.skill-progress');
+            const animateSkills = () => {
+                skillBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateSkills();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            document.querySelector('.skills-container').style.opacity = '1';
+        };
+    </script>
+</body>
+</html> 
